@@ -6,12 +6,12 @@ class Game {
         this.width = 0;
         this.height = 0;
         this.player = undefined;
-        this.playerShots = [];  // Array to hold player shots
-        this.opponentShots = [];  // Array to hold opponent shots
+        this.playerShots = []; 
+        this.opponentShots = [];  
         this.opponent = undefined;
         this.xDown = null;
         this.paused = false;
-        this.score = 0;  // Initialize score
+        this.score = 0;  
     }
 
     start () {
@@ -30,15 +30,15 @@ class Game {
             this.player = new Player(this);
             this.opponent = new Opponent(this);
 
-            this.timer = setInterval(() => this.update(), 50);  // Game update loop
+            this.timer = setInterval(() => this.update(), 50); 
         }
     }
 
     shoot(character) {
         const arrayShots = character instanceof Player ? this.playerShots : this.opponentShots;
-        const newShot = new Shot(this, character);  // Create a new shot
-        arrayShots.push(newShot);  // Add the shot to the appropriate array (player or opponent)
-        document.body.appendChild(newShot.image);  // Add shot's image to the DOM
+        const newShot = new Shot(this, character);  
+        arrayShots.push(newShot);  
+        document.body.appendChild(newShot.image);  
         if (character instanceof Player) {
             this.keyPressed = undefined;
         }
@@ -50,12 +50,12 @@ class Game {
             if (this.opponent === undefined) {
                 this.opponent = new Opponent(this);
             }
-            this.opponent.update();  // Move opponent
+            this.opponent.update(); 
 
-            this.playerShots.forEach((shot) => shot.update());  // Update player shots
-            this.opponentShots.forEach((shot) => shot.update());  // Update opponent shots
+            this.playerShots.forEach((shot) => shot.update());  
+            this.opponentShots.forEach((shot) => shot.update());  
 
-            this.checkCollisions();  // Check for collisions
+            this.checkCollisions();  
             this.updateScore();
             this.updateLives();
             this.render();
@@ -68,7 +68,6 @@ class Game {
             this.opponent.render();
         }
 
-        // Render all shots
         this.playerShots.forEach((shot) => shot.render());
         this.opponentShots.forEach((shot) => shot.render());
     }
@@ -118,16 +117,16 @@ class Game {
             this.keyPressed = undefined;
         } else {
             switch (event.keyCode) {
-                case 37:  // Left arrow
+                case 37:  
                     this.keyPressed = KEY_LEFT;
                     break;
-                case 39:  // Right arrow
+                case 39:  
                     this.keyPressed = KEY_RIGHT;
                     break;
-                case 32:  // Spacebar (shoot)
+                case 32:  
                     this.keyPressed = KEY_SHOOT;
                     break;
-                case 27: case 81:  // ESC or Q key (pause)
+                case 27: case 81:  
                     this.pauseOrResume();
                     break;
             }
@@ -159,7 +158,7 @@ class Game {
     checkCollisions() {
         let impact = false;
 
-        // Check if opponent shots hit the player
+        
         for (let i = 0; i < this.opponentShots.length; i++) {
             impact = impact || this.hasCollision(this.player, this.opponentShots[i]);
         }
@@ -167,7 +166,6 @@ class Game {
             this.player.collide();
         }
 
-        // Check if player shots hit the opponent
         let killed = false;
         for (let i = 0; i < this.playerShots.length; i++) {
             killed = killed || this.hasCollision(this.opponent, this.playerShots[i]);

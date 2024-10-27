@@ -16,7 +16,7 @@ class Character extends Entity {
      */
     constructor (game, width, height, x, y, speed, myImage, myImageDead) {
         super(game, width, height, x, y, speed, myImage);
-        this.dead = false; // Indicates whether the character is alive or dead
+        this.dead = false; 
         this.myImageDead = myImageDead;
     }
 

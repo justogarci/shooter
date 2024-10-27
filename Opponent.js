@@ -17,7 +17,7 @@ class Opponent extends Character {
 
     update() {
         if (!this.dead && !this.game.ended) {
-            this.y += this.speed;  // Move down
+            this.y += this.speed;  
             if (this.y > this.game.height) {
                 this.y = 0;  
             }
@@ -39,9 +39,9 @@ class Opponent extends Character {
 
     shoot() {
         if (!this.dead && !this.game.ended) {
-            this.game.shoot(this);  // Opponent shoots
+            this.game.shoot(this);  
 
-            // Continue shooting after a delay
+            
             setTimeout(() => this.shoot(), 1000 + getRandomNumber(2500));
         }
     }
@@ -49,7 +49,7 @@ class Opponent extends Character {
     collide() {
         if (!this.dead) {
             this.game.score += 1;
-            this.game.updateScore();  // Update the score
+            this.game.updateScore();  
             setTimeout(() => this.game.removeOpponent(), 2000);
             super.collide();
         }
