@@ -4,8 +4,8 @@
 class Shot extends Entity {
     /**
     * Initializes a shot
-    * @param game {Game} The instance of the game to which the character belongs
-     * @param character {Character} Game character that fires the shot
+    * @param game 
+     * @param character
     */
 
     constructor (game, character) {
